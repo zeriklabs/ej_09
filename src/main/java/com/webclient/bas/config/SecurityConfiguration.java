@@ -29,8 +29,8 @@ public class SecurityConfiguration {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // Rutas públicas (inicio y autenticación)
-                        .requestMatchers("/", "/auth/**").permitAll()
+                        // Rutas públicas (inicio, autenticación y manejo de errores)
+                        .requestMatchers("/", "/auth/**", "/error").permitAll()
                         // Cualquier otra petición requiere autenticación
                         .anyRequest().authenticated()
                 )

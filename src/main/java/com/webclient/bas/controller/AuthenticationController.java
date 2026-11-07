@@ -7,10 +7,9 @@ import com.webclient.bas.entity.User;
 import com.webclient.bas.service.AuthenticationService;
 import com.webclient.bas.service.JwtService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RequestMapping("/auth")
 @RestController
@@ -24,10 +23,28 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
     }
 
+    @GetMapping("/signup")
+    public ResponseEntity<Map<String, String>> signupInfo() {
+        return ResponseEntity.ok(Map.of(
+                "mensaje", "Este es un endpoint REST. Para registrarte debes enviar una peticion HTTP POST con un body JSON.",
+                "metodo_requerido", "POST",
+                "ejemplo_body", "{\"fullName\":\"Tu Nombre\", \"email\":\"usuario@example.com\", \"password\":\"password123\"}"
+        ));
+    }
+
     @PostMapping("/signup")
     public ResponseEntity<User> register(@RequestBody RegisterUserDto registerUserDto) {
         User registeredUser = authenticationService.signup(registerUserDto);
         return ResponseEntity.ok(registeredUser);
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<Map<String, String>> loginInfo() {
+        return ResponseEntity.ok(Map.of(
+                "mensaje", "Este es un endpoint REST. Para iniciar sesion debes enviar una peticion HTTP POST con tu email y password en un body JSON.",
+                "metodo_requerido", "POST",
+                "ejemplo_body", "{\"email\":\"usuario@example.com\", \"password\":\"password123\"}"
+        ));
     }
 
     @PostMapping("/login")
@@ -43,4 +60,3 @@ public class AuthenticationController {
         return ResponseEntity.ok(loginResponse);
     }
 }
-
