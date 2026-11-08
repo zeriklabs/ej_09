@@ -29,8 +29,15 @@ public class SecurityConfiguration {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // Rutas públicas (inicio, autenticación y manejo de errores)
-                        .requestMatchers("/", "/auth/**", "/error").permitAll()
+                        // Rutas públicas (inicio, autenticación, errores y documentación Swagger)
+                        .requestMatchers(
+                                "/",
+                                "/auth/**",
+                                "/error",
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html"
+                        ).permitAll()
                         // Cualquier otra petición requiere autenticación
                         .anyRequest().authenticated()
                 )

@@ -16,6 +16,7 @@ public class HomeController {
         Map<String, Object> response = new LinkedHashMap<>();
         response.put("status", "ONLINE");
         response.put("message", "API de Spring Security con JWT funcionando correctamente");
+        response.put("swagger_ui", "https://ej-09.onrender.com/swagger-ui/index.html");
         response.put("endpoints_publicos", List.of(
                 "POST /auth/signup (Registro de usuario)",
                 "POST /auth/login (Inicio de sesión y obtención del Token JWT)"
@@ -27,4 +28,3 @@ public class HomeController {
         return ResponseEntity.ok(response);
     }
 }
-
